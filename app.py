@@ -35,3 +35,17 @@ sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', fmt='.2f', linewidths=0.5)
 plt.title('Matrice de corrélation des caractéristiques')
 plt.show()
 
+# 4. Visualisation des classes cibles
+sns.countplot(x='target', data=df, palette='Set2')
+plt.title('Distribution des classes cibles')
+plt.xlabel('Classe')
+plt.ylabel('Nombre d\'échantillons')
+plt.show()
+
+
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)  # Normalisation des caractéristiques
+
+
+# Séparer les données en ensembles d'entraînement (70%) et de test (30%)
+X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.3, random_state=42)
