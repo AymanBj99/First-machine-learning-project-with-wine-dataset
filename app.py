@@ -1,14 +1,24 @@
-import numpy as np
 import pandas as pd
-import missingno as msno
-#get the wine dataset from sklearn and take a look at the description provided
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
 from sklearn import datasets
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import train_test_split
 
-#charger et visualiser dataset
+
+# Charger le dataset wine
 wine = datasets.load_wine()
-print(wine.DESCR)
+X = wine.data
+y = wine.target
 
-#visualiser dataframe avec la cible et afficher les 5 premieres lignes
-df = pd.DataFrame(wine.data, columns=wine.feature_names)
-df['label'] = wine.target
-df.head()
+# Convertir les données en DataFrame pour faciliter l'analyse
+df = pd.DataFrame(X, columns=wine.feature_names)
+
+# Ajouter la cible (type de vin) dans le DataFrame pour faciliter l'exploration
+df['target'] = y
+
+# 1. Statistiques descriptives
+print("Statistiques descriptives :")
+print(df.describe())
+
