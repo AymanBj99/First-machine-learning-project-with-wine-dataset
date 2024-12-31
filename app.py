@@ -8,3 +8,7 @@ from sklearn import datasets
 wine = datasets.load_wine()
 print(wine.DESCR)
 
+#visualiser dataframe avec la cible et afficher les 5 premieres lignes
+df = pd.DataFrame(wine.data, columns=wine.feature_names)
+df['label'] = wine.target
+df.head()
