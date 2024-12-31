@@ -22,3 +22,16 @@ df['target'] = y
 print("Statistiques descriptives :")
 print(df.describe())
 
+
+# 2. Distribution des variables : histogrammes
+df.iloc[:, :-1].hist(bins=20, figsize=(15, 10))
+plt.suptitle('Distribution des caractéristiques des vins')
+plt.show()
+
+# 3. Matrice de corrélation des caractéristiques
+corr_matrix = df.iloc[:, :-1].corr()
+plt.figure(figsize=(12, 8))
+sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', fmt='.2f', linewidths=0.5)
+plt.title('Matrice de corrélation des caractéristiques')
+plt.show()
+
