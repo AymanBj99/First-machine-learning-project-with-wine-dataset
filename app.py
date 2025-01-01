@@ -7,6 +7,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import classification_report, confusion_matrix
+from sklearn.model_selection import cross_val_score
 
 
 
@@ -75,3 +76,24 @@ plt.xlabel('Prédictions')
 plt.ylabel('Véritables labels')
 plt.title('Matrice de Confusion - KNN')
 plt.show()
+
+# Tester différentes valeurs de K (1 à 20)
+k_range = range(1, 21)
+k_scores = []
+
+for k in k_range:
+    knn = KNeighborsClassifier(n_neighbors=k)
+    scores = cross_val_score(knn, X_scaled, y, cv=10, scoring='accuracy')
+    k_scores.append(scores.mean())
+
+# Affichage des résultats
+plt.figure(figsize=(8, 6))
+plt.plot(k_range, k_scores, marker='o')
+plt.xlabel('Nombre de voisins K')
+plt.ylabel('Précision moyenne')
+plt.title('Recherche du meilleur K pour KNN')
+plt.show()
+
+# Meilleur K
+best_k = k_range[k_scores.index(max(k_scores))]
+print(f"Meilleur K : {best_k} avec une précision moyenne de {max(k_scores):.2f}")
