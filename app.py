@@ -6,6 +6,8 @@ from sklearn import datasets
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import classification_report, confusion_matrix
+
 
 
 # Charger le dataset wine
@@ -56,3 +58,12 @@ knn = KNeighborsClassifier(n_neighbors=5)
 
 # Entraîner le modèle
 knn.fit(X_train, y_train)
+
+
+# Faire des prédictions sur l'ensemble de test
+y_pred = knn.predict(X_test)
+
+# Afficher le rapport de classification
+print("Classification Report:")
+print(classification_report(y_test, y_pred))
+
