@@ -67,3 +67,11 @@ y_pred = knn.predict(X_test)
 print("Classification Report:")
 print(classification_report(y_test, y_pred))
 
+# Afficher la matrice de confusion
+cm = confusion_matrix(y_test, y_pred)
+plt.figure(figsize=(6, 5))
+sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", xticklabels=wine.target_names, yticklabels=wine.target_names)
+plt.xlabel('Prédictions')
+plt.ylabel('Véritables labels')
+plt.title('Matrice de Confusion - KNN')
+plt.show()
